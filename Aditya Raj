@@ -1,1 +1,333 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
 
+body{
+    background:#ececec;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.container{
+    width:1100px;
+    max-width:100%;
+    min-height:700px;
+    display:grid;
+    grid-template-columns:45% 55%;
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 20px 50px rgba(0,0,0,.18);
+}
+
+/* LEFT */
+
+.left{
+    background:#0f0f0f;
+    color:#fff;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:50px;
+    position:relative;
+}
+
+.left::before{
+    content:"";
+    position:absolute;
+    width:260px;
+    height:260px;
+    border-radius:50%;
+    background:#d4af37;
+    opacity:.08;
+    top:-60px;
+    right:-70px;
+}
+
+.left::after{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:#fff;
+    opacity:.04;
+    bottom:-50px;
+    left:-40px;
+}
+
+.brand{
+    z-index:2;
+}
+
+.logo{
+    width:70px;
+    height:70px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:18px;
+    background:#d4af37;
+    color:#111;
+    font-size:28px;
+    margin-bottom:18px;
+}
+
+.brand h1{
+    font-size:36px;
+    margin-bottom:10px;
+}
+
+.brand p{
+    color:#bbb;
+}
+
+.hero{
+    z-index:2;
+}
+
+.hero h2{
+    font-size:44px;
+    line-height:1.2;
+    margin-bottom:18px;
+}
+
+.hero p{
+    color:#cfcfcf;
+    line-height:1.8;
+}
+
+.roles{
+    z-index:2;
+}
+
+.roles ul{
+    list-style:none;
+}
+
+.roles li{
+    margin:18px 0;
+    font-size:17px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.roles i{
+    color:#d4af37;
+}
+
+.left-footer{
+    z-index:2;
+    color:#aaa;
+}
+
+.left-footer small{
+    display:block;
+    margin-top:8px;
+}
+
+/* RIGHT */
+
+.right{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:50px;
+}
+
+form{
+    width:100%;
+    max-width:420px;
+}
+
+form h2{
+    font-size:34px;
+    color:#222;
+}
+
+.subtitle{
+    margin:10px 0 35px;
+    color:#777;
+}
+
+label{
+    display:block;
+    margin:18px 0 8px;
+    font-size:14px;
+    font-weight:600;
+    color:#444;
+}
+
+input,
+select{
+    width:100%;
+    padding:15px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    outline:none;
+    font-size:15px;
+    transition:.3s;
+}
+
+input:focus,
+select:focus{
+    border-color:#d4af37;
+    box-shadow:0 0 0 4px rgba(212,175,55,.15);
+}
+
+.password-box{
+    position:relative;
+}
+
+.eye{
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+    border:none;
+    background:none;
+    cursor:pointer;
+    color:#888;
+    font-size:18px;
+}
+
+.options{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:22px 0;
+}
+
+.remember{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:14px;
+}
+
+.remember input{
+    width:auto;
+}
+
+.options a{
+    color:#d4af37;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.login-btn{
+    width:100%;
+    border:none;
+    padding:16px;
+    background:#d4af37;
+    color:#111;
+    border-radius:12px;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.login-btn:hover{
+    background:#be9920;
+    transform:translateY(-2px);
+}
+
+.access{
+    margin-top:30px;
+    text-align:center;
+}
+
+.access small{
+    color:#777;
+}
+
+.badges{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+    margin-top:18px;
+}
+
+.badges span{
+    padding:8px 14px;
+    border-radius:30px;
+    background:#f3f3f3;
+    font-size:13px;
+}
+
+dialog{
+    border:none;
+    border-radius:14px;
+    padding:25px;
+    width:320px;
+    text-align:center;
+}
+
+dialog::backdrop{
+    background:rgba(0,0,0,.45);
+}
+
+dialog button{
+    margin-top:20px;
+    padding:10px 22px;
+    border:none;
+    border-radius:10px;
+    background:#d4af37;
+    cursor:pointer;
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+.container{
+    grid-template-columns:1fr;
+}
+
+.left{
+    padding:35px;
+}
+
+.hero h2{
+    font-size:34px;
+}
+
+.right{
+    padding:35px 25px;
+}
+
+}
+
+@media(max-width:600px){
+
+.left{
+    text-align:center;
+}
+
+.logo{
+    margin:auto auto 20px;
+}
+
+.roles li{
+    justify-content:center;
+}
+
+.options{
+    flex-direction:column;
+    gap:15px;
+}
+
+form h2{
+    font-size:28px;
+}
+
+}
