@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Driver Management</title>
+
+<link rel="stylesheet"
+href="driver.css">
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<script src="https://kit.fontawesome.com/4f7b9b6b0d.js"
+crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- Sidebar -->
+
+<aside class="sidebar">
+
+<div>
+
+<h2>TransitOps</h2>
+
+<p id="userRole">
+
+Fleet Manager
+
+</p>
+
+<ul>
+
+<li onclick="location.href='dashboard.html'">
+
+<i class="fa-solid fa-house"></i>
+
+<span>Dashboard</span>
+
+</li>
+
+<li onclick="location.href='vehicle.html'">
+
+<i class="fa-solid fa-truck"></i>
+
+<span>Vehicles</span>
+
+</li>
+
+<li class="active">
+
+<i class="fa-solid fa-id-card"></i>
+
+<span>Drivers</span>
+
+</li>
+
+<li onclick="location.href='trip.html'">
+
+<i class="fa-solid fa-route"></i>
+
+<span>Trips</span>
+
+</li>
+
+<li onclick="location.href='maintenance.html'">
+
+<i class="fa-solid fa-screwdriver-wrench"></i>
+
+<span>Maintenance</span>
+
+</li>
+
+<li onclick="location.href='fuel.html'">
+
+<i class="fa-solid fa-gas-pump"></i>
+
+<span>Fuel & Expenses</span>
+
+</li>
+
+<li onclick="location.href='reports.html'">
+
+<i class="fa-solid fa-chart-line"></i>
+
+<span>Reports</span>
+
+</li>
+
+</ul>
+
+</div>
+
+<button id="logoutBtn">
+
+Logout
+
+</button>
+
+</aside>
+
+<!-- Main -->
+
+<main class="main">
+
+<header>
+
+<div>
+
+<h1>Driver Management</h1>
+
+<p>
+
+Register and manage all fleet drivers
+
+</p>
+
+</div>
+
+<div class="header-right">
+
+<input
+
+type="search"
+
+id="searchDriver"
+
+placeholder="Search Driver...">
+
+<button
+
+id="addDriver">
+
+<i class="fa-solid fa-user-plus"></i>
+
+Add Driver
+
+</button>
+
+</div>
+
+</header>
+        <!-- ==========================
+             SUMMARY CARDS
+        =========================== -->
+
+        <section class="summary">
+
+            <div class="summary-card">
+
+                <h2 id="totalDrivers">0</h2>
+
+                <p>Total Drivers</p>
+
+            </div>
+
+            <div class="summary-card">
+
+                <h2 id="availableDrivers">0</h2>
+
+                <p>Available</p>
+
+            </div>
+
+            <div class="summary-card">
+
+                <h2 id="tripDrivers">0</h2>
+
+                <p>On Trip</p>
+
+            </div>
+
+            <div class="summary-card">
+
+                <h2 id="suspendedDrivers">0</h2>
+
+                <p>Suspended</p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==========================
+             DRIVER TABLE
+        =========================== -->
+
+        <section class="table-card">
+
+            <div class="table-header">
+
+                <h2>Driver Registry</h2>
+
+                <button id="refreshDrivers">
+
+                    <i class="fa-solid fa-rotate"></i>
+
+                    Refresh
+
+                </button>
+
+            </div>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Name</th>
+
+                        <th>License No.</th>
+
+                        <th>Category</th>
+
+                        <th>Phone</th>
+
+                        <th>Safety Score</th>
+
+                        <th>Status</th>
+
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="driverBody">
+
+                    <tr>
+
+                        <td colspan="7" class="empty">
+
+                            No Drivers Registered
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+                <!-- ==========================
+             ADD / EDIT DRIVER MODAL
+        =========================== -->
+
+        <dialog id="driverModal">
+
+            <form id="driverForm">
+
+                <div class="modal-header">
+
+                    <h2 id="modalTitle">
+
+                        Add Driver
+
+                    </h2>
+
+                    <button
+                        type="button"
+                        id="closeModal">
+
+                        ✕
+
+                    </button>
+
+                </div>
+
+                <div class="form-grid">
+
+                    <!-- Driver Name -->
+
+                    <div class="form-group">
+
+                        <label>Driver Name</label>
+
+                        <input
+                            type="text"
+                            id="driverName"
+                            placeholder="Rahul Sharma"
+                            required>
+
+                    </div>
+
+                    <!-- License Number -->
+
+                    <div class="form-group">
+
+                        <label>License Number</label>
+
+                        <input
+                            type="text"
+                            id="licenseNumber"
+                            placeholder="MP042023001234"
+                            required>
+
+                    </div>
+
+                    <!-- License Category -->
+
+                    <div class="form-group">
+
+                        <label>License Category</label>
+
+                        <select id="licenseCategory">
+
+                            <option>LMV</option>
+                            <option>HMV</option>
+                            <option>Transport</option>
+                            <option>Commercial</option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- License Expiry -->
+
+                    <div class="form-group">
+
+                        <label>License Expiry Date</label>
+
+                        <input
+                            type="date"
+                            id="licenseExpiry"
+                            required>
+
+                    </div>
+
+                    <!-- Contact Number -->
+
+                    <div class="form-group">
+
+                        <label>Contact Number</label>
+
+                        <input
+                            type="tel"
+                            id="contactNumber"
+                            placeholder="9876543210"
+                            required>
+
+                    </div>
+
+                    <!-- Safety Score -->
+
+                    <div class="form-group">
+
+                        <label>Safety Score</label>
+
+                        <input
+                            type="number"
+                            id="safetyScore"
+                            min="0"
+                            max="100"
+                            placeholder="95">
+
+                    </div>
+
+                    <!-- Status -->
+
+                    <div class="form-group">
+
+                        <label>Status</label>
+
+                        <select id="driverStatus">
+
+                            <option>Available</option>
+
+                            <option>On Trip</option>
+
+                            <option>Off Duty</option>
+
+                            <option>Suspended</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        id="cancelBtn">
+
+                        Cancel
+
+                    </button>
+
+                    <button
+                        type="submit"
+                        id="saveDriver">
+
+                        Save Driver
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </dialog>
+                <!-- ==========================
+             DELETE DRIVER DIALOG
+        =========================== -->
+
+        <dialog id="deleteDialog">
+
+            <div class="dialog-content">
+
+                <h2>
+
+                    Delete Driver
+
+                </h2>
+
+                <p>
+
+                    Are you sure you want to delete this driver?
+
+                </p>
+
+                <div class="dialog-buttons">
+
+                    <button
+                        id="cancelDelete"
+                        type="button">
+
+                        Cancel
+
+                    </button>
+
+                    <button
+                        id="confirmDelete"
+                        type="button">
+
+                        Delete
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </dialog>
+
+
+
+        <!-- ==========================
+             VIEW DRIVER DIALOG
+        =========================== -->
+
+        <dialog id="viewDialog">
+
+            <div class="dialog-content">
+
+                <h2>
+
+                    Driver Details
+
+                </h2>
+
+                <div id="driverDetails">
+
+                    <!-- Filled by driver.js -->
+
+                </div>
+
+                <button
+                    id="closeViewDialog"
+                    type="button">
+
+                    Close
+
+                </button>
+
+            </div>
+
+        </dialog>
+
+
+
+        <!-- ==========================
+             SUCCESS / ERROR POPUP
+        =========================== -->
+
+        <dialog id="popup">
+
+            <h3 id="popupTitle">
+
+                TransitOps
+
+            </h3>
+
+            <p id="popupMessage">
+
+                Success
+
+            </p>
+
+            <button id="popupClose">
+
+                OK
+
+            </button>
+
+        </dialog>
+
+
+
+        <!-- ==========================
+             LOADER
+        =========================== -->
+
+        <div id="loader" class="loader">
+
+            <div class="spinner"></div>
+
+            <p>
+
+                Loading Drivers...
+
+            </p>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- ==========================
+     JAVASCRIPT
+========================== -->
+
+<script src="js/storage.js"></script>
+
+<script src="js/driver.js"></script>
+
+</body>
+
+</html>
