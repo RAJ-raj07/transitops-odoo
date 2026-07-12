@@ -7,7 +7,7 @@ A centralized web application to digitize and automate fleet and transport opera
 - Aditya Raj (Team Lead) – Backend Development
 - Sujal Raj – Frontend Development
 - Keshav Ranjan – Testing & Support
-- Ayushi Raj – Full Stack Development
+- Ayushi – Full Stack Development
 
 ## Problem Statement
 
