@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Vehicle Management</title>
+
+<link rel="stylesheet"
+href="vehicle.css">
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<script src="https://kit.fontawesome.com/4f7b9b6b0d.js"
+crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- Sidebar -->
+
+<aside class="sidebar">
+
+<div>
+
+<h2>TransitOps</h2>
+
+<p id="userRole">
+Fleet Manager
+</p>
+
+<ul>
+
+<li onclick="location.href='dashboard.html'">
+
+<i class="fa-solid fa-house"></i>
+
+<span>Dashboard</span>
+
+</li>
+
+<li class="active">
+
+<i class="fa-solid fa-truck"></i>
+
+<span>Vehicles</span>
+
+</li>
+
+<li onclick="location.href='driver.html'">
+
+<i class="fa-solid fa-id-card"></i>
+
+<span>Drivers</span>
+
+</li>
+
+<li onclick="location.href='trip.html'">
+
+<i class="fa-solid fa-route"></i>
+
+<span>Trips</span>
+
+</li>
+
+<li onclick="location.href='maintenance.html'">
+
+<i class="fa-solid fa-screwdriver-wrench"></i>
+
+<span>Maintenance</span>
+
+</li>
+
+<li onclick="location.href='fuel.html'">
+
+<i class="fa-solid fa-gas-pump"></i>
+
+<span>Fuel & Expenses</span>
+
+</li>
+
+<li onclick="location.href='reports.html'">
+
+<i class="fa-solid fa-chart-line"></i>
+
+<span>Reports</span>
+
+</li>
+
+</ul>
+
+</div>
+
+<button id="logoutBtn">
+
+Logout
+
+</button>
+
+</aside>
+
+<!-- Main -->
+
+<main class="main">
+
+<header>
+
+<div>
+
+<h1>Vehicle Management</h1>
+
+<p>
+
+Register and manage all fleet vehicles
+
+</p>
+
+</div>
+
+<div class="header-right">
+
+<input
+type="search"
+id="searchVehicle"
+placeholder="Search Vehicle...">
+
+<button
+id="addVehicle">
+
+<i class="fa-solid fa-plus"></i>
+
+Add Vehicle
+
+</button>
+
+</div>
+
+</header>
+        <!-- ==========================
+             SUMMARY CARDS
+        =========================== -->
+
+        <section class="summary">
+
+            <div class="summary-card">
+
+                <h2 id="totalVehicles">0</h2>
+
+                <p>Total Vehicles</p>
+
+            </div>
+
+            <div class="summary-card">
+
+                <h2 id="availableVehicles">0</h2>
+
+                <p>Available</p>
+
+            </div>
+
+            <div class="summary-card">
+
+                <h2 id="tripVehicles">0</h2>
+
+                <p>On Trip</p>
+
+            </div>
+
+            <div class="summary-card">
+
+                <h2 id="maintenanceVehicles">0</h2>
+
+                <p>Maintenance</p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==========================
+             VEHICLE TABLE
+        =========================== -->
+
+        <section class="table-card">
+
+            <div class="table-header">
+
+                <h2>Fleet Vehicles</h2>
+
+                <button id="refreshVehicles">
+
+                    <i class="fa-solid fa-rotate"></i>
+
+                    Refresh
+
+                </button>
+
+            </div>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Registration</th>
+
+                        <th>Vehicle</th>
+
+                        <th>Model</th>
+
+                        <th>Type</th>
+
+                        <th>Capacity</th>
+
+                        <th>Status</th>
+
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="vehicleBody">
+
+                    <tr>
+
+                        <td colspan="7" class="empty">
+
+                            No Vehicles Found
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+                <!-- ==========================
+             ADD / EDIT VEHICLE MODAL
+        =========================== -->
+
+        <dialog id="vehicleModal">
+
+            <form id="vehicleForm">
+
+                <div class="modal-header">
+
+                    <h2 id="modalTitle">
+
+                        Add Vehicle
+
+                    </h2>
+
+                    <button
+                        type="button"
+                        id="closeModal">
+
+                        ✕
+
+                    </button>
+
+                </div>
+
+                <div class="form-grid">
+
+                    <!-- Registration -->
+
+                    <div class="form-group">
+
+                        <label>
+
+                            Registration Number
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="registration"
+                            placeholder="MP04AB1234"
+                            required>
+
+                    </div>
+
+                    <!-- Vehicle Name -->
+
+                    <div class="form-group">
+
+                        <label>
+
+                            Vehicle Name
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="vehicleName"
+                            placeholder="Tata Ace"
+                            required>
+
+                    </div>
+
+                    <!-- Model -->
+
+                    <div class="form-group">
+
+                        <label>
+
+                            Model
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="model"
+                            placeholder="Ace Gold">
+
+                    </div>
+
+                    <!-- Type -->
+
+                    <div class="form-group">
+
+                        <label>
+
+                            Vehicle Type
+
+                        </label>
+
+                        <select id="vehicleType">
+
+                            <option>Truck</option>
+
+                            <option>Mini Truck</option>
+
+                            <option>Pickup</option>
+
+                            <option>Van</option>
+
+                            <option>Bus</option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- Capacity -->
+
+                    <div class="form-group">
+
+                        <label>
+
+                            Capacity (KG)
+
+                        </label>
+
+                        <input
+                            type="number"
+                            id="capacity"
+                            placeholder="500">
+
+                    </div>
+
+                    <!-- Odometer -->
+
+                    <div class="form-group">
+
+                        <label>
+
+                            Odometer (KM)
+
+                        </label>
+
+                        <input
+                            type="number"
+                            id="odometer"
+                            placeholder="45000">
+
+                    </div>
+
+                    <!-- Cost -->
+
+                    <div class="form-group">
+
+                        <label>
+
+                            Acquisition Cost
+
+                        </label>
+
+                        <input
+                            type="number"
+                            id="cost"
+                            placeholder="950000">
+
+                    </div>
+
+                    <!-- Status -->
+
+                    <div class="form-group">
+
+                        <label>
+
+                            Status
+
+                        </label>
+
+                        <select id="status">
+
+                            <option>Available</option>
+
+                            <option>On Trip</option>
+
+                            <option>Maintenance</option>
+
+                            <option>Retired</option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- Region -->
+
+                    <div class="form-group">
+
+                        <label>
+
+                            Region
+
+                        </label>
+
+                        <select id="region">
+
+                            <option>North</option>
+
+                            <option>South</option>
+
+                            <option>East</option>
+
+                            <option>West</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        id="cancelBtn">
+
+                        Cancel
+
+                    </button>
+
+                    <button
+                        type="submit"
+                        id="saveVehicle">
+
+                        Save Vehicle
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </dialog>
+                <!-- ==========================
+             DELETE CONFIRMATION
+        =========================== -->
+
+        <dialog id="deleteDialog">
+
+            <div class="dialog-content">
+
+                <h2>
+
+                    Delete Vehicle
+
+                </h2>
+
+                <p>
+
+                    Are you sure you want to delete this vehicle?
+
+                </p>
+
+                <div class="dialog-buttons">
+
+                    <button
+                        id="cancelDelete"
+                        type="button">
+
+                        Cancel
+
+                    </button>
+
+                    <button
+                        id="confirmDelete"
+                        type="button">
+
+                        Delete
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </dialog>
+
+
+
+        <!-- ==========================
+             SUCCESS / ERROR POPUP
+        =========================== -->
+
+        <dialog id="popup">
+
+            <h3 id="popupTitle">
+
+                TransitOps
+
+            </h3>
+
+            <p id="popupMessage">
+
+                Success
+
+            </p>
+
+            <button id="popupClose">
+
+                OK
+
+            </button>
+
+        </dialog>
+
+
+
+        <!-- ==========================
+             LOADING
+        =========================== -->
+
+        <div id="loader" class="loader">
+
+            <div class="spinner"></div>
+
+            <p>
+
+                Loading Vehicles...
+
+            </p>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- ==========================
+     JAVASCRIPT
+========================== -->
+
+<script src="js/storage.js"></script>
+
+<script src="js/vehicle.js"></script>
+
+</body>
+
+</html>

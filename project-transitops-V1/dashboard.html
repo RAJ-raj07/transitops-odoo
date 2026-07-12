@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TransitOps Dashboard</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/4f7b9b6b0d.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- ======================
+         SIDEBAR
+    ======================= -->
+
+    <aside class="sidebar">
+
+        <div>
+
+            <h2>TransitOps</h2>
+
+            <p class="role-name" id="userRole">
+                Fleet Manager
+            </p>
+
+            <ul>
+
+                <li id="dashboardMenu" class="active">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </li>
+
+                <li id="vehicleMenu"
+                    onclick="location.href='vehicle.html'">
+
+                    <i class="fa-solid fa-truck"></i>
+
+                    <span>Vehicles</span>
+
+                </li>
+
+                <li id="driverMenu"
+                    onclick="location.href='driver.html'">
+
+                    <i class="fa-solid fa-id-card"></i>
+
+                    <span>Drivers</span>
+
+                </li>
+
+                <li id="tripMenu"
+                    onclick="location.href='trip.html'">
+
+                    <i class="fa-solid fa-route"></i>
+
+                    <span>Trips</span>
+
+                </li>
+
+                <li id="maintenanceMenu"
+                    onclick="location.href='maintenance.html'">
+
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+
+                    <span>Maintenance</span>
+
+                </li>
+
+                <li id="fuelMenu"
+                    onclick="location.href='fuel.html'">
+
+                    <i class="fa-solid fa-gas-pump"></i>
+
+                    <span>Fuel & Expenses</span>
+
+                </li>
+
+                <li id="reportMenu"
+                    onclick="location.href='reports.html'">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    <span>Reports</span>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+        <button id="logoutBtn" class="logout">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            Logout
+
+        </button>
+
+    </aside>
+
+
+
+    <!-- ======================
+         MAIN CONTENT
+    ======================= -->
+
+    <main class="main">
+
+        <!-- Header -->
+
+        <header class="header">
+
+            <div>
+
+                <h1>Dashboard</h1>
+
+                <p id="welcomeText">
+
+                    Welcome back.
+
+                </p>
+
+            </div>
+
+            <div class="header-right">
+
+                <input
+                    type="search"
+                    id="search"
+                    placeholder="Search vehicles, drivers, trips..."
+                >
+
+                <button class="notify">
+
+                    <i class="fa-solid fa-bell"></i>
+
+                </button>
+
+                <img
+                    src="https://i.pravatar.cc/60"
+                    alt="Profile"
+                >
+
+            </div>
+
+        </header>
+
+
+
+        <!-- Quick Actions -->
+
+        <section class="quick-actions">
+
+            <button id="addVehicleBtn">
+
+                <i class="fa-solid fa-plus"></i>
+
+                Add Vehicle
+
+            </button>
+
+            <button id="addDriverBtn">
+
+                <i class="fa-solid fa-user-plus"></i>
+
+                Add Driver
+
+            </button>
+
+            <button id="createTripBtn">
+
+                <i class="fa-solid fa-route"></i>
+
+                Create Trip
+
+            </button>
+
+        </section>
+                <!-- ======================
+             DASHBOARD STATS
+        ======================= -->
+
+        <section class="dashboard-cards">
+
+            <article class="card">
+
+                <div class="card-top">
+
+                    <i class="fa-solid fa-truck-fast card-icon"></i>
+
+                    <span class="status green"></span>
+
+                </div>
+
+                <h2 id="totalVehicles">0</h2>
+
+                <p>Total Vehicles</p>
+
+            </article>
+
+
+
+            <article class="card">
+
+                <div class="card-top">
+
+                    <i class="fa-solid fa-circle-check card-icon"></i>
+
+                    <span class="status blue"></span>
+
+                </div>
+
+                <h2 id="availableVehicles">0</h2>
+
+                <p>Available Vehicles</p>
+
+            </article>
+
+
+
+            <article class="card">
+
+                <div class="card-top">
+
+                    <i class="fa-solid fa-route card-icon"></i>
+
+                    <span class="status orange"></span>
+
+                </div>
+
+                <h2 id="runningTrips">0</h2>
+
+                <p>Trips Running</p>
+
+            </article>
+
+
+
+            <article class="card">
+
+                <div class="card-top">
+
+                    <i class="fa-solid fa-screwdriver-wrench card-icon"></i>
+
+                    <span class="status red"></span>
+
+                </div>
+
+                <h2 id="maintenanceVehicles">0</h2>
+
+                <p>Maintenance</p>
+
+            </article>
+
+
+
+            <article class="card">
+
+                <div class="card-top">
+
+                    <i class="fa-solid fa-user-check card-icon"></i>
+
+                    <span class="status green"></span>
+
+                </div>
+
+                <h2 id="activeDrivers">0</h2>
+
+                <p>Drivers Available</p>
+
+            </article>
+
+
+
+            <article class="card">
+
+                <div class="card-top">
+
+                    <i class="fa-solid fa-chart-pie card-icon"></i>
+
+                    <span class="status blue"></span>
+
+                </div>
+
+                <h2 id="fleetUtilization">0%</h2>
+
+                <p>Fleet Utilization</p>
+
+            </article>
+
+        </section>
+
+
+
+        <!-- ======================
+             FILTER BAR
+        ======================= -->
+
+        <section class="filter-bar">
+
+            <select id="vehicleType">
+
+                <option value="">Vehicle Type</option>
+
+                <option>Truck</option>
+
+                <option>Mini Truck</option>
+
+                <option>Van</option>
+
+                <option>Bus</option>
+
+            </select>
+
+
+
+            <select id="vehicleStatus">
+
+                <option value="">Status</option>
+
+                <option>Available</option>
+
+                <option>On Trip</option>
+
+                <option>Maintenance</option>
+
+                <option>Retired</option>
+
+            </select>
+
+
+
+            <select id="vehicleRegion">
+
+                <option value="">Region</option>
+
+                <option>North</option>
+
+                <option>South</option>
+
+                <option>East</option>
+
+                <option>West</option>
+
+            </select>
+
+        </section>
+
+
+
+        <!-- ======================
+             QUICK SUMMARY
+        ======================= -->
+
+        <section class="summary-box">
+
+            <div>
+
+                <h3>Total Drivers</h3>
+
+                <h2 id="driverCount">0</h2>
+
+            </div>
+
+            <div>
+
+                <h3>Total Trips</h3>
+
+                <h2 id="tripCount">0</h2>
+
+            </div>
+
+            <div>
+
+                <h3>Fuel Logs</h3>
+
+                <h2 id="fuelLogs">0</h2>
+
+            </div>
+
+            <div>
+
+                <h3>Total Expenses</h3>
+
+                <h2 id="expenseTotal">₹0</h2>
+
+            </div>
+
+        </section>
+                <!-- ===========================
+             MAIN DASHBOARD CONTENT
+        ============================ -->
+
+        <section class="dashboard-grid">
+
+            <!-- ======================
+                 RECENT TRIPS
+            ======================= -->
+
+            <section class="table-card">
+
+                <div class="table-header">
+
+                    <h2>Recent Trips</h2>
+
+                    <button id="viewTripsBtn">
+                        View All
+                    </button>
+
+                </div>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Trip ID</th>
+                            <th>Vehicle</th>
+                            <th>Driver</th>
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="recentTrips">
+
+                        <tr>
+
+                            <td colspan="4">
+
+                                No Trips Found
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </section>
+
+
+
+            <!-- ======================
+                 RECENT ACTIVITY
+            ======================= -->
+
+            <section class="activity-card">
+
+                <div class="table-header">
+
+                    <h2>Recent Activity</h2>
+
+                </div>
+
+                <ul id="activityList">
+
+                    <li>
+
+                        🚛 Dashboard Initialized
+
+                    </li>
+
+                    <li>
+
+                        👤 Waiting for Driver Registration
+
+                    </li>
+
+                    <li>
+
+                        📦 Waiting for Vehicle Registration
+
+                    </li>
+
+                    <li>
+
+                        🛣 Waiting for Trip Creation
+
+                    </li>
+
+                </ul>
+
+            </section>
+
+        </section>
+
+
+
+        <!-- ======================
+             VEHICLE STATUS
+        ======================= -->
+
+        <section class="table-card">
+
+            <div class="table-header">
+
+                <h2>Vehicle Status</h2>
+
+                <button id="vehiclePageBtn">
+
+                    Manage Vehicles
+
+                </button>
+
+            </div>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Registration</th>
+                        <th>Vehicle</th>
+                        <th>Type</th>
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="vehicleTable">
+
+                    <tr>
+
+                        <td colspan="4">
+
+                            No Vehicles Added
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+
+
+        <!-- ======================
+             DRIVER STATUS
+        ======================= -->
+
+        <section class="table-card">
+
+            <div class="table-header">
+
+                <h2>Driver Status</h2>
+
+                <button id="driverPageBtn">
+
+                    Manage Drivers
+
+                </button>
+
+            </div>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Name</th>
+                        <th>License</th>
+                        <th>Status</th>
+                        <th>Safety Score</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="driverTable">
+
+                    <tr>
+
+                        <td colspan="4">
+
+                            No Drivers Registered
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+                <!-- ==========================
+             FOOTER
+        =========================== -->
+
+        <footer class="dashboard-footer">
+
+            <p>
+                TransitOps © 2026 | Smart Transport Operations Platform
+            </p>
+
+        </footer>
+
+    </main>
+
+</div>
+
+<!-- ==========================
+     NOTIFICATION MODAL
+========================== -->
+
+<dialog id="notificationDialog">
+
+    <h2>Notifications</h2>
+
+    <ul id="notificationList">
+
+        <li>No new notifications.</li>
+
+    </ul>
+
+    <button id="closeNotification">
+
+        Close
+
+    </button>
+
+</dialog>
+
+<!-- ==========================
+     LOADING SCREEN
+========================== -->
+
+<div id="loader" class="loader">
+
+    <div class="spinner"></div>
+
+    <p>Loading Dashboard...</p>
+
+</div>
+
+<!-- ==========================
+     USER INFO
+========================== -->
+
+<input
+    type="hidden"
+    id="currentUser"
+>
+
+<input
+    type="hidden"
+    id="currentRole"
+>
+
+<!-- ==========================
+     JAVASCRIPT FILES
+========================== -->
+
+<script src="js/storage.js"></script>
+
+<script src="js/dashboard.js"></script>
+
+</body>
+
+</html>
